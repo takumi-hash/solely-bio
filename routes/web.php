@@ -3,6 +3,7 @@
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,14 @@ Route::get('/dashboard', [CardController::class, 'edit'])
 Route::patch('/links', [CardController::class, 'update'])
     ->middleware(['auth'])
     ->name('links.update');
+
+Route::post('/image', [ImageController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('image.update');
+
+Route::patch('/image', [ImageController::class, 'destroy'])
+    ->middleware(['auth'])
+    ->name('image.delete');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name(
