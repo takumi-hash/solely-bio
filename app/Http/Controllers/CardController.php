@@ -78,6 +78,7 @@ class CardController extends Controller
 
     public function update(CardUpdateRequest $request)
     {
+        // TODO: Implement validation
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
