@@ -9,7 +9,6 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-
         <!-- Handle Name -->
         <div>
             <x-input-label for="handlename" :value="__('Handle Name')" />

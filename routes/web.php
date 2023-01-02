@@ -20,28 +20,37 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [WelcomeController::class, 'welcome'])->name(
-    'welcome'
-);
+Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 
 Route::get('/u/{handlename}', [CardController::class, 'show'])->name(
     'card.show'
 );
 
-Route::get('/ogp_images/{handlename}/ogp.jpg', [CardController::class, 'getOgp'])->name('ogp.get');
+Route::get('/ogp_images/{handlename}/ogp.jpg', [
+    CardController::class,
+    'getOgp',
+])->name('ogp.get');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::put('/links', [CardController::class, 'update'])
     ->middleware(['auth'])
     ->name('links.update');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name(
+        'profile.edit'
+    );
+    Route::patch('/profile', [ProfileController::class, 'update'])->name(
+        'profile.update'
+    );
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name(
+        'profile.destroy'
+    );
 });
 
 require __DIR__ . '/auth.php';
