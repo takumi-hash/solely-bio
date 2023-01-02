@@ -18,7 +18,7 @@ class CardController extends Controller
     {
         $user = User::where('handlename', '=', $handlename)->first();
         $links = $user->links()->get();
-        return view('card.show', compact(['user', 'links']));
+        return view('profile.show', compact(['user', 'links']));
     }
 
     public function getOgp($handlename)
@@ -37,13 +37,18 @@ class CardController extends Controller
             $font->align('left');
             $font->valign('top');
         });
-        $img->text('Checkout solely.bio/u/' . $user->handlename . ' for full bio.', 220, 340, function ($font) {
-            $font->file(public_path('fonts/NotoSansJP-Medium.otf'));
-            $font->size(32);
-            $font->color('#555555');
-            $font->align('left');
-            $font->valign('top');
-        });
+        $img->text(
+            'Checkout solely.bio/u/' . $user->handlename . ' for full bio.',
+            220,
+            340,
+            function ($font) {
+                $font->file(public_path('fonts/NotoSansJP-Medium.otf'));
+                $font->size(32);
+                $font->color('#555555');
+                $font->align('left');
+                $font->valign('top');
+            }
+        );
 
         return $img->response();
     }
@@ -57,8 +62,10 @@ class CardController extends Controller
 
     public function updateById($id, LinkUpdateRequest $request)
     {
-
-        $link = $request->user()->links()->find($id);
+        $link = $request
+            ->user()
+            ->links()
+            ->find($id);
         $link = $link->fill($request->validated());
         // $link = Link::find($id)->fill($request->validated());
         // $link->title = $request->title;
