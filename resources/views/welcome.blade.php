@@ -54,7 +54,7 @@
                     <p class="text-slate-500">You can create one in a minute :)</p>
                 </x-section>
                 <x-section>
-                    <Card user={demoUser} links={links}></Card>
+                    <x-card :user="$demoUser" :links="$links"></x-card>
                 </x-section>
                 <x-section>
                     <h2 class="text-2xl mb-4">What is Solely for?</h2>
@@ -89,10 +89,6 @@
                     <p class="text-left mb-4">
                         Anyone you share the URL with can see your profile. Basically you
                         want to input the information you want to make visible to public.
-                    </p>
-                    <p class="text-left mb-4">
-                        Don’t worry, however, we prevent Google Search from indexing your
-                        information.
                     </p>
                 </x-section>
 
