@@ -16,9 +16,14 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Takumi Hashimoto',
+            'handlename' => 'takumi-hashimoto',
+            'email' => 'test@example.com',
+            'password' => bcrypt('testpass'),
+        ]);
+        $this->call([
+            LinksSeeder::class,
+        ]);
     }
 }
