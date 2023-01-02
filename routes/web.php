@@ -31,13 +31,16 @@ Route::get('/ogp_images/{handlename}/ogp.jpg', [
     'getOgp',
 ])->name('ogp.get');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})
-    ->middleware(['auth', 'verified'])
+Route::get('/dashboard', [CardController::class, 'edit'])
+    ->middleware(['auth'])
     ->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })
+//     ->middleware(['auth', 'verified'])
+//     ->name('dashboard');
 
-Route::put('/links', [CardController::class, 'update'])
+Route::patch('/links', [CardController::class, 'update'])
     ->middleware(['auth'])
     ->name('links.update');
 

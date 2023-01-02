@@ -21,6 +21,13 @@ class CardController extends Controller
         return view('profile.show', compact(['user', 'links']));
     }
 
+    public function edit(Request $request)
+    {
+        $user = $request->user();
+        $links = $user->links()->get();
+        return view('dashboard', compact(['user', 'links']));
+    }
+
     public function getOgp($handlename)
     {
         $user = User::where('handlename', '=', $handlename)->first();
@@ -53,28 +60,21 @@ class CardController extends Controller
         return $img->response();
     }
 
-    public function edit(Request $request)
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+    // public function updateById($id, LinkUpdateRequest $request)
+    // {
+    //     $link = $request
+    //         ->user()
+    //         ->links()
+    //         ->find($id);
+    //     $link = $link->fill($request->validated());
+    //     // $link = Link::find($id)->fill($request->validated());
+    //     // $link->title = $request->title;
+    //     // $link->url = $request->url;
 
-    public function updateById($id, LinkUpdateRequest $request)
-    {
-        $link = $request
-            ->user()
-            ->links()
-            ->find($id);
-        $link = $link->fill($request->validated());
-        // $link = Link::find($id)->fill($request->validated());
-        // $link->title = $request->title;
-        // $link->url = $request->url;
+    //     $link->save();
 
-        $link->save();
-
-        return Redirect::route('dashboard');
-    }
+    //     return Redirect::route('dashboard');
+    // }
 
     public function update(LinkUpdateRequest $request)
     {
