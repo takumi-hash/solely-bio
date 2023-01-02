@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Link;
 
-use App\Http\Requests\LinkUpdateRequest;
+use App\Http\Requests\CardUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -76,8 +76,16 @@ class CardController extends Controller
     //     return Redirect::route('dashboard');
     // }
 
-    public function update(LinkUpdateRequest $request)
+    public function update(CardUpdateRequest $request)
     {
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
         foreach ($request->links as $item) {
             Link::updateOrCreate(
                 ['id' => $item['id']],
@@ -85,6 +93,6 @@ class CardController extends Controller
             );
         }
 
-        return Redirect::route('dashboard');
+        return Redirect::route('dashboard')->with('status', 'card-updated');
     }
 }

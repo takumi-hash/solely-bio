@@ -17,6 +17,11 @@
         @csrf
         @method('patch')
         <div>
+            <x-input-label for="name" :value="__('Name')" />
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div>
+        <div>
             @foreach ($links as $link)
                 <x-text-input id="{{'links[' . $link->id .'][id]'}}" name="{{'links[' . $link->id .'][id]'}}" type="hidden" class="mt-1 block w-full" :value="$link->id" />
                 <x-input-label for="{{'links[' . $link->id .'][title]'}}" :value="'Title ' . ($loop->index)+1" />
@@ -29,7 +34,7 @@
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
-            @if (session('status') === 'profile-updated')
+            @if (session('status') === 'card-updated')
                 <p
                     x-data="{ show: true }"
                     x-show="show"
