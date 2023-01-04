@@ -12,6 +12,11 @@
     <form id="send-verification" method="patch" action="{{ route('verification.send') }}">
         @csrf
     </form>
+
+    <div class="text-center">
+        <img src="{{$user->imageUrl}}" class="mx-auto my-4 rounded-full" width="200" height="200" alt="Your Photo">
+    </div>
+
     <form method="post" action="{{ route('image.update') }}" enctype="multipart/form-data">
         @csrf
         @method('post')
