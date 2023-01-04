@@ -9,7 +9,7 @@
     <div class="text-left">
         @foreach ($links as $link)
         <h2 class="text-slate-500 font-bold mb-2">
-            <a href="{{ $link->url }}">{{ $link->title }}</Link>
+            <a href="{{ $link->url }}">{{ $link->title }}</a>
         </h2>
         @endforeach
     </div>
