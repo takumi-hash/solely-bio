@@ -1,4 +1,4 @@
-@import "@fontsource/noto-sans-jp";
+@import '@fontsource/noto-sans-jp';
 
 @tailwind base;
 @tailwind components;
@@ -8,10 +8,10 @@
     body {
         padding: 0;
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, "Noto Sans JP",
-            theme("fontFamily.serif");
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, 'Noto Sans JP',
+            theme('fontFamily.serif');
         /*        color: #fff;*/
-        background: theme("colors.slate.300");
+        background: theme('colors.gray.100');
     }
 }
 
