@@ -79,19 +79,12 @@ class CardController extends Controller
     public function update(CardUpdateRequest $request)
     {
         // TODO: Implement validation
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
         foreach ($request->links as $item) {
-            if (is_null($item->id)) {
+            if (empty($item['id'])) {
                 $link = new Link();
-                $link->title = $item->title;
-                $link->url = $item->url;
+                $link->title = $item['title'];
+                $link->url = $item['url'];
+                $link->user_id = Auth::id();
                 $link->save();
             } else {
                 Link::updateOrCreate(
