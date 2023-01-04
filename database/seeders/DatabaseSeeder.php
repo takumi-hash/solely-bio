@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Takumi Hashimoto',
             'handlename' => 'takumi-hashimoto',
             'email' => 'test@example.com',
+            'imageUrl' => 'images/default.webp',
             'password' => bcrypt('testpass'),
         ]);
         $this->call([LinksSeeder::class]);
