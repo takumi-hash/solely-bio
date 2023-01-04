@@ -16,9 +16,6 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $user = $request->user();
-        $links = $user->llinks();
-
         $request->validate([
             'image' => 'required',
         ]);
@@ -29,7 +26,13 @@ class ImageController extends Controller
             $request->file('image')->getRealPath()
         )->getSecurePath();
 
-        return view('dashboard', compact(['user', 'links', 'uploadedFileUrl']));
+        $user = $request->user();
+        $links = $user->links();
+
+        return view(
+            'dashboard',
+            compact(['user', 'links', 'uploadedFileUrl'])
+        )->with('status', 'photo-updated');
     }
 
     public function destroy($id)

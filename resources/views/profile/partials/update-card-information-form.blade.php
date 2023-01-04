@@ -17,6 +17,15 @@
         @method('post')
         <input type="file" name="image">
         <x-primary-button><x-icons.photograph />Change Photo</x-primary-button>
+        @if (session('status') === 'profile-updated')
+            <p
+                x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 5000)"
+                class="text-sm text-gray-600"
+            >{{ __('Saved.') }}</p>
+        @endif
     </form>
 
     <form method="post" action="{{ route('profile.update') }}" class="mt-8 space-y-2">
