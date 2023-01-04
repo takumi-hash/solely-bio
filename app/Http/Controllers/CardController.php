@@ -88,10 +88,17 @@ class CardController extends Controller
         $request->user()->save();
 
         foreach ($request->links as $item) {
-            Link::updateOrCreate(
-                ['id' => $item['id']],
-                ['title' => $item['title'], 'url' => $item['url']]
-            );
+            if (is_null($item->id)) {
+                $link = new Link();
+                $link->title = $item->title;
+                $link->url = $item->url;
+                $link->save();
+            } else {
+                Link::updateOrCreate(
+                    ['id' => $item['id']],
+                    ['title' => $item['title'], 'url' => $item['url']]
+                );
+            }
         }
 
         return Redirect::route('dashboard')->with('status', 'card-updated');

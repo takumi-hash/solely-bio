@@ -41,14 +41,20 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
         <div>
-            @foreach ($links as $link)
-                <x-text-input id="{{'links[' . $link->id .'][id]'}}" name="{{'links[' . $link->id .'][id]'}}" type="hidden" class="mt-1 block w-full" :value="$link->id" />
+            @if($links->count() > 0)
+                @foreach ($links as $link)
+                    <x-text-input id="{{'links[' . $link->id .'][id]'}}" name="{{'links[' . $link->id .'][id]'}}" type="hidden" class="mt-1 block w-full" :value="$link->id" />
+                    <x-input-label for="{{'links[' . $link->id .'][title]'}}" :value="'Title ' . ($loop->index)+1" />
+                    <x-text-input id="{{'links[' . $link->id .'][title]'}}" name="{{'links[' . $link->id .'][title]'}}" type="text" class="mt-1 block w-full" :value="old('Title', $link->title)" />
+                    <x-input-label for="{{'links[' . $link->id .'][url]'}}" :value="'URL ' . ($loop->index)+1" />
+                    <x-text-input id="{{'links[' . $link->id .'][url]'}}" name="{{'links[' . $link->id .'][url]'}}" type="url" class="mt-1 block w-full" :value="old('URL', $link->url)" />
+                    <x-input-error class="mt-2" :messages="$errors->get('links')" />
+                @endforeach
+            @else
+            <!--  TODO: implement add form button -->
                 <x-input-label for="{{'links[' . $link->id .'][title]'}}" :value="'Title ' . ($loop->index)+1" />
                 <x-text-input id="{{'links[' . $link->id .'][title]'}}" name="{{'links[' . $link->id .'][title]'}}" type="text" class="mt-1 block w-full" :value="old('Title', $link->title)" />
-                <x-input-label for="{{'links[' . $link->id .'][url]'}}" :value="'URL ' . ($loop->index)+1" />
-                <x-text-input id="{{'links[' . $link->id .'][url]'}}" name="{{'links[' . $link->id .'][url]'}}" type="url" class="mt-1 block w-full" :value="old('URL', $link->url)" />
-                <x-input-error class="mt-2" :messages="$errors->get('links')" />
-            @endforeach
+            @endif
         </div>
 
         <div class="flex items-center gap-4">
