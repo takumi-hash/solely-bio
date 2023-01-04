@@ -41,7 +41,7 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button><x-icons.check />{{ __('Save') }}</x-primary-button>
             @if (session('status') === 'profile-updated')
                 <p
                     x-data="{ show: true }"
@@ -88,7 +88,7 @@
                     <x-input-label for="{{'links['.$loop->index.'][url]'}}" :value="'URL ' . ($loop->index)+1" />
                     <x-text-input id="{{'links['.$loop->index.'][url]'}}" name="{{'links['.$loop->index.'][url]'}}" type="url" class="mt-1 block w-full" :value="old('URL', $link->url)" />
                     <x-input-error class="mt-2" :messages="$errors->get('links')" />
-                    <x-secondary-button type="button" name="remove" class="remove-input-field">Remove Link</x-secondary-button>
+                    <x-secondary-button type="button" name="remove" class="remove-input-field"><x-icons.trash />Remove Link</x-secondary-button>
                 </div>
                 @endforeach
             @else
@@ -98,15 +98,15 @@
                     <x-text-input id="links[1][title]" name="links[1][title]" type="text" class="mt-1 block w-full" />
                     <x-input-label for="links[1][url]" :value="'URL 1'" />
                     <x-text-input id="links[1][url]" name="links[1][url]" type="url" class="mt-1 block w-full" />
-                    <x-secondary-button type="button" name="remove" class="remove-input-field">Remove</x-secondary-button>
+                    <x-secondary-button type="button" name="remove" class="remove-input-field"><x-icons.trash />Remove</x-secondary-button>
                 <div>
             @endif
         </div>
         <div class="mt-8">
-            <x-secondary-button type="button" name="add" id="add-button" class="">+ Add New Link</x-secondary-button>
+            <x-secondary-button type="button" name="add" id="add-button" class=""><x-icons.plus />Add New Link</x-secondary-button>
         </div>
         <div class="mt-8 flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button><x-icons.check />{{ __('Save') }}</x-primary-button>
             @if (session('status') === 'card-updated')
                 <p
                     x-data="{ show: true }"
