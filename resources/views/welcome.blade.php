@@ -50,7 +50,7 @@
                 </x-section>
                 <x-section class="text-center">
                     <p class="text-sm">solely.bio/u/your-name</p>
-                    <x-ctabutton linkto="/register" text="Create your bio"></x-ctabutton>
+                    <x-cta-button linkto="/register">{{__('Create my bio')}}</x-cta-button>
                     <p class="text-slate-500">You can create one in a minute :)</p>
                 </x-section>
                 <x-section>
