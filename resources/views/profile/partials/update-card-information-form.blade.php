@@ -12,25 +12,12 @@
     <form id="send-verification" method="patch" action="{{ route('verification.send') }}">
         @csrf
     </form>
-
-    {!! Form::open(['action' => 'App\Http\Controllers\ImageController@store', 'method' => 'POST' , 'files'=>true]) !!}
-        <h3 class="text-primary">Upload Image</h3><br>
-
-        <div class="form-group">
-            {!! Form::label('image', 'Uplode Picture') !!}
-            <br>
-            {!! Form::file('image', null,['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::submit('Upload', ['class'=>'btn btn-primary']) !!}
-        </div>
-    {!! Form::close() !!}
-
-    {!! Form::open(['method'=>'DELETE', 'action'=> ['App\Http\Controllers\ImageController@destroy',"delete"]]) !!}
-        <div class="form-group pt-2">
-            {!! Form::submit('Delete Image', ['class'=>'btn btn-danger']) !!}
-        </div>
-    {!! Form::close() !!}
+    <form method="post" action="{{ route('image.update') }}" enctype="multipart/form-data">
+        @csrf
+        @method('post')
+        <input type="file" name="image">
+        <x-primary-button><x-icons.photograph />Change Photo</x-primary-button>
+    </form>
 
     <form method="post" action="{{ route('profile.update') }}" class="mt-8 space-y-2">
         @csrf

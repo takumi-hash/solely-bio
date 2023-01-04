@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use ahsankhatri\firestore\FireStoreApiClient;
-use ahsankhatri\firestore\FireStoreDocument;
-use ahsankhatri\firestore\FireStoreErrorCodes;
-
+use Cloudinary;
 use Session;
 
 class ImageController extends Controller
@@ -19,11 +16,20 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+        $user = $request->user();
+        $links = $user->llinks();
+
         $request->validate([
             'image' => 'required',
         ]);
         $input = $request->all();
         $image = $request->file('image'); //image file from frontend
+
+        $uploadedFileUrl = Cloudinary::upload(
+            $request->file('image')->getRealPath()
+        )->getSecurePath();
+
+        return view('dashboard', compact(['user', 'links', 'uploadedFileUrl']));
     }
 
     public function destroy($id)

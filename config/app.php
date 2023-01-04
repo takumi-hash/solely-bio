@@ -184,6 +184,7 @@ return [
          * Package Service Providers...
          */
         Intervention\Image\ImageServiceProvider::class,
+        CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -210,6 +211,8 @@ return [
         ->merge([
             // 'ExampleClass' => App\Example\ExampleClass::class,
             'InterventionImage' => Intervention\Image\Facades\Image::class,
+            'Cloudinary' =>
+                CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class,
         ])
         ->toArray(),
 ];
