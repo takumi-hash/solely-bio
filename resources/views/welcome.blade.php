@@ -95,8 +95,15 @@
                 <x-section>
                     <h2 class="text-2xl mb-4">Aknowlegements</h2>
                     <p class="text-left mb-4">
-                        This website uses Noto Sans JP, which is licensed under SIL Open Font License (OFL). For more details, please refer to
-                        <Link class="underline" href="https://fonts.google.com/noto/specimen/Noto+Sans+JP">the official page</Link>.
+                        This website uses
+                        <ul>
+                            <li>
+                                <a class="underline" href="https://fonts.google.com/noto/specimen/Noto+Sans+JP">Noto Sans JP</a>, licensed under SIL Open Font License (OFL).
+                            </li>
+                            <li>
+                                <a class="underline" href="https://laravel-icons.com/">Laravel Icons</a>, licensed under MIT License.
+                            </li>
+                        </ul> 
                     </p>
                 </x-section>
             </div>
