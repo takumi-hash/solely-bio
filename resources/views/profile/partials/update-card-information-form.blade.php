@@ -40,23 +40,49 @@
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
-        <div>
+        <div id="dynamic-table">
             @if($links->count() > 0)
                 @foreach ($links as $link)
-                    <x-text-input id="{{'links[' . $link->id .'][id]'}}" name="{{'links[' . $link->id .'][id]'}}" type="hidden" class="mt-1 block w-full" :value="$link->id" />
-                    <x-input-label for="{{'links[' . $link->id .'][title]'}}" :value="'Title ' . ($loop->index)+1" />
-                    <x-text-input id="{{'links[' . $link->id .'][title]'}}" name="{{'links[' . $link->id .'][title]'}}" type="text" class="mt-1 block w-full" :value="old('Title', $link->title)" />
-                    <x-input-label for="{{'links[' . $link->id .'][url]'}}" :value="'URL ' . ($loop->index)+1" />
-                    <x-text-input id="{{'links[' . $link->id .'][url]'}}" name="{{'links[' . $link->id .'][url]'}}" type="url" class="mt-1 block w-full" :value="old('URL', $link->url)" />
+                <div>
+                    <x-text-input id="{{'links[][id]'}}" name="{{'links[][id]'}}" type="hidden" class="mt-1 block w-full" :value="$link->id" />
+                    <x-input-label for="{{'links[][title]'}}" :value="'Title ' . ($loop->index)+1" />
+                    <x-text-input id="{{'links[][title]'}}" name="{{'links[][title]'}}" type="text" class="mt-1 block w-full" :value="old('Title', $link->title)" />
+                    <x-input-label for="{{'links[][url]'}}" :value="'URL ' . ($loop->index)+1" />
+                    <x-text-input id="{{'links[][url]'}}" name="{{'links[][url]'}}" type="url" class="mt-1 block w-full" :value="old('URL', $link->url)" />
                     <x-input-error class="mt-2" :messages="$errors->get('links')" />
+                    <x-secondary-button type="button" name="remove" class=".remove-input-field">Remove</x-secondary-button>
+                </div>
                 @endforeach
             @else
-            <!--  TODO: implement add form button -->
-                <x-input-label for="{{'links[' . $link->id .'][title]'}}" :value="'Title ' . ($loop->index)+1" />
-                <x-text-input id="{{'links[' . $link->id .'][title]'}}" name="{{'links[' . $link->id .'][title]'}}" type="text" class="mt-1 block w-full" :value="old('Title', $link->title)" />
+                <!-- displays forms to input user's first url. -->
+                <x-input-label for="{{'links[][title]'}}" :value="'Title ' . 1" />
+                <x-text-input id="{{'links[][title]'}}" name="{{'links[][title]'}}" type="text" class="mt-1 block w-full" :value="old('Title', '')" />
+                <x-input-label for="{{'links[][url]'}}" :value="'URL ' . 1" />
+                <x-text-input id="{{'links[][url]'}}" name="{{'links[][url]'}}" type="url" class="mt-1 block w-full" :value="old('URL', '')" />
+                <x-input-error class="mt-2" :messages="$errors->get('links')" />
+                <x-secondary-button type="button" name="remove" class=".remove-input-field">Remove</x-secondary-button>
             @endif
+            <script type="module">
+                var i = 0;
+                $("#add-button").click(function () {
+                    ++i;
+                    const forms_to_add = `
+                        <div>
+                            <x-input-label for="links[][title]" :value="'Title ${i+1}'" />
+                            <x-text-input id="links[][title]" name="links[][title]" type="text" class="mt-1 block w-full" />
+                            <x-input-label for="links[][url]" :value="'URL ${i+1}'" />
+                            <x-text-input id="links[][url]" name="links[][url]" type="url" class="mt-1 block w-full" />
+                            <x-secondary-button type="button" name="remove" class=".remove-input-field">Remove</x-secondary-button>
+                        </div>`
+                    ;
+                    $("#dynamic-table").append(forms_to_add)
+                });
+                $(document).on('click', '.remove-input-field', function () {
+                    $(this).parents('div').remove();
+                });
+            </script>
         </div>
-
+        <x-secondary-button type="button" name="add" id="add-button" class="">Add</x-secondary-button>
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
             @if (session('status') === 'card-updated')
