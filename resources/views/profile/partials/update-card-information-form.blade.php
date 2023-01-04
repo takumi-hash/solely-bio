@@ -14,7 +14,7 @@
     </form>
 
     <div class="text-center">
-        <img src="{{$user->imageUrl}}" class="mx-auto my-4 rounded-full" width="200" height="200" alt="Your Photo">
+        <img src="{{ $user->imageUrl }}" class="mx-auto my-4 rounded-full" width="200" height="200" alt="Your Photo">
     </div>
 
     <form method="post" action="{{ route('image.update') }}" enctype="multipart/form-data">

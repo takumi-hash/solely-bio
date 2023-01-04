@@ -51,6 +51,7 @@ class RegisteredUserController extends Controller
             'handlename' => $request->handlename,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'imageUrl' => 'images/default.webp',
         ]);
 
         event(new Registered($user));
