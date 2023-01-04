@@ -37,7 +37,7 @@
         <!-- @endif -->
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div class="mt-8 overflow-hidden shadow sm:rounded-lg">
+            <div class="mt-8 overflow-hidden">
                 <x-section class="text-center">
                     <h1 class="text-4xl font-bold my-4">Solely</h1>
                     <p class="text-sm mb-4">
