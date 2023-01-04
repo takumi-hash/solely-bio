@@ -60,32 +60,9 @@
         @csrf
         @method('patch')
         <div id="dynamic-table">
-            @if($links->count() > 0)
-                @foreach ($links as $link)
-                <div>
-                    <x-text-input id="{{'links['.$loop->index.'][id]'}}" name="{{'links['.$loop->index.'][id]'}}" type="hidden" class="mt-1 block w-full" :value="$link->id" />
-                    <x-input-label for="{{'links['.$loop->index.'][title]'}}" :value="'Title ' . ($loop->index)+1" />
-                    <x-text-input id="{{'links['.$loop->index.'][title]'}}" name="{{'links['.$loop->index.'][title]'}}" type="text" class="mt-1 block w-full" :value="old('Title', $link->title)" />
-                    <x-input-label for="{{'links['.$loop->index.'][url]'}}" :value="'URL ' . ($loop->index)+1" />
-                    <x-text-input id="{{'links['.$loop->index.'][url]'}}" name="{{'links['.$loop->index.'][url]'}}" type="url" class="mt-1 block w-full" :value="old('URL', $link->url)" />
-                    <x-input-error class="mt-2" :messages="$errors->get('links')" />
-                    <x-secondary-button type="button" name="remove" class=".remove-input-field">Remove</x-secondary-button>
-                </div>
-                @endforeach
-            @else
-                <!-- displays forms to input user's first url. -->
-                <div>
-                    <x-input-label for="{{'links[][title]'}}" :value="'Title ' . 1" />
-                    <x-text-input id="{{'links[][title]'}}" name="{{'links[][title]'}}" type="text" class="mt-1 block w-full" :value="old('Title', '')" />
-                    <x-input-label for="{{'links[][url]'}}" :value="'URL ' . 1" />
-                    <x-text-input id="{{'links[][url]'}}" name="{{'links[][url]'}}" type="url" class="mt-1 block w-full" :value="old('URL', '')" />
-                    <x-input-error class="mt-2" :messages="$errors->get('links')" />
-                    <x-secondary-button type="button" name="remove" class=".remove-input-field">Remove</x-secondary-button>
-                <div>
-            @endif
-            <script type="module">
+                        <script type="module">
                 const existing = '{{$links->count()}}';
-                var i = 0+existing;
+                var i = existing == '0' ? 1 : existing;
                 $("#add-button").click(function () {
                     ++i;
                     const forms_to_add = `
@@ -103,6 +80,28 @@
                     $(this).parents('div').remove();
                 });
             </script>
+            @if($links->count() > 0)
+                @foreach ($links as $link)
+                <div>
+                    <x-text-input id="{{'links['.$loop->index.'][id]'}}" name="{{'links['.$loop->index.'][id]'}}" type="hidden" class="mt-1 block w-full" :value="$link->id" />
+                    <x-input-label for="{{'links['.$loop->index.'][title]'}}" :value="'Title ' . ($loop->index)+1" />
+                    <x-text-input id="{{'links['.$loop->index.'][title]'}}" name="{{'links['.$loop->index.'][title]'}}" type="text" class="mt-1 block w-full" :value="old('Title', $link->title)" />
+                    <x-input-label for="{{'links['.$loop->index.'][url]'}}" :value="'URL ' . ($loop->index)+1" />
+                    <x-text-input id="{{'links['.$loop->index.'][url]'}}" name="{{'links['.$loop->index.'][url]'}}" type="url" class="mt-1 block w-full" :value="old('URL', $link->url)" />
+                    <x-input-error class="mt-2" :messages="$errors->get('links')" />
+                    <x-secondary-button type="button" name="remove" class=".remove-input-field">Remove</x-secondary-button>
+                </div>
+                @endforeach
+            @else
+                <!-- displays forms to input user's first url. -->
+                <div>
+                    <x-input-label for="links[1][title]" :value="'Title 1'" />
+                    <x-text-input id="links[1][title]" name="links[1][title]" type="text" class="mt-1 block w-full" />
+                    <x-input-label for="links[1][url]" :value="'URL 1'" />
+                    <x-text-input id="links[1][url]" name="links[1][url]" type="url" class="mt-1 block w-full" />
+                    <x-secondary-button type="button" name="remove" class=".remove-input-field">Remove</x-secondary-button>
+                <div>
+            @endif
         </div>
         <x-secondary-button type="button" name="add" id="add-button" class="">Add</x-secondary-button>
         <div class="flex items-center gap-4">
