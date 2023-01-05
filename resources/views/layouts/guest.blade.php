@@ -12,7 +12,7 @@
         <meta property="og:title" content="{{ config('app.name', 'Solely.bio') }}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ Request::url() }}" />
-        <meta property="og:image" content="{{ '/ogp_images/'. str_replace('http://www.solely.bio/u/', '', Request::url()) .'/ogp.jpg' }}" />
+        <meta property="og:image" content="{{ 'https://www.solely.bio/ogp_images/'. str_replace('http://www.solely.bio/u/', '', Request::url()) .'/ogp.jpg' }}" />
         @endif
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
