@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<head>
+<head prefix="og: https://ogp.me/ns#">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Solely.bio') }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-    </style>
-
+    
+    <!-- OGP -->
+    <meta property="og:title" content="{{ config('app.name', 'Solely.bio') }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.solely.bio/" />
+    <meta property="og:image" content="{{ asset('images/top_ogp.jpg') }}" />
+    
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
