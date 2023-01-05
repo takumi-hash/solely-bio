@@ -99,8 +99,7 @@
                     <x-text-input id="links[1][title]" name="links[1][title]" type="text" class="mt-1 block w-full" />
                     <x-input-label for="links[1][url]" :value="'URL 1'" />
                     <x-text-input id="links[1][url]" name="links[1][url]" type="url" class="mt-1 block w-full" />
-                    <x-secondary-button type="button" name="remove" class="remove-input-field"><x-icons.trash />Remove</x-secondary-button>
-                <div>
+            </div>
             @endif
         </div>
         <div class="mt-8">
