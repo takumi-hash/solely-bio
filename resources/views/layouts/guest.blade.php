@@ -13,6 +13,7 @@
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ Request::url() }}" />
         <meta property="og:image" content="{{ 'https://www.solely.bio/ogp_images/'. str_replace('http://www.solely.bio/u/', '', Request::url()) .'/ogp.jpg' }}" />
+        <meta name="twitter:card" content="summary_large_image" />
         @endif
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
